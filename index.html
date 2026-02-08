@@ -1,1 +1,207 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #ffffff);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.35);
+    width: 90%;
+    max-width: 420px;
+    animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+h1 {
+    color: #ff4d88;
+}
+
+p {
+    color: #555;
+    font-size: 18px;
+}
+
+.buttons {
+    position: relative;
+    height: 130px;
+    margin-top: 25px;
+}
+
+button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #ff4d88;
+    color: white;
+}
+
+#yesBtn:hover {
+    background: #ff1f6b;
+    transform: scale(1.05);
+}
+
+#noBtn {
+    background: #f3f3f3;
+    color: #333;
+    position: absolute;
+    left: 55%;
+    top: 10px;
+}
+
+#funnyText {
+    margin-top: 15px;
+    color: #ff4d88;
+    font-weight: 600;
+}
+
+.question, .final {
+    display: none;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.nextBtn {
+    margin-top: 20px;
+    background: #ff4d88;
+    color: white;
+}
+
+.final img {
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.heart {
+    position: absolute;
+    font-size: 18px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); opacity: 0; }
+    to { transform: translateY(-10vh); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="main">
+    <h1>Hey Love ❤️</h1>
+    <p>Will you be my Valentine?</p>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No 🙈</button>
+    </div>
+
+    <div id="funnyText"></div>
+</div>
+
+<div class="card question" id="q1">
+    <h1>Just curious 😌</h1>
+    <p>What do you love most about us?</p>
+    <input type="text" placeholder="Type anything…">
+    <button class="nextBtn" onclick="go('q1','q2')">Next</button>
+</div>
+
+<div class="card question" id="q2">
+    <h1>Last one 💖</h1>
+    <p>Where should our next date be?</p>
+    <input type="text" placeholder="Dream place…">
+    <button class="nextBtn" onclick="go('q2','final')">Next</button>
+</div>
+
+<div class="card final" id="final">
+    <h1>GOOD CHOICE 😏❤️</h1>
+    <p>You clearly have excellent taste.</p>
+    <img src="https://i.imgur.com/9Y7ZJ5f.jpeg">
+    <p style="margin-top:15px;">Happy Valentine’s Day 💘</p>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const funnyText = document.getElementById("funnyText");
+
+const messages = [
+    "Nice try 😏",
+    "That button is just for decoration 💅",
+    "Heart says YES ❤️",
+    "You really thought NO was an option? 😂",
+    "Stop resisting your destiny 😌",
+    "This is getting embarrassing now 😳",
+    "Okay enough, just click YES 💕"
+];
+
+let count = 0;
+
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 260 - 130;
+    const y = Math.random() * 120 - 60;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+    funnyText.innerText = messages[Math.min(count, messages.length - 1)];
+    count++;
+});
+
+yesBtn.addEventListener("click", () => {
+    document.getElementById("main").style.display = "none";
+    document.getElementById("q1").style.display = "block";
+});
+
+function go(a, b) {
+    document.getElementById(a).style.display = "none";
+    document.getElementById(b).style.display = "block";
+}
+
+// Floating hearts
+setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.color = "pink";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 5000);
+}, 500);
+</script>
+
+</body>
+</html>
